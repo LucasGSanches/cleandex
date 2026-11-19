@@ -1,11 +1,19 @@
 import { StyleSheet, Text, View } from 'react-native';
+import Home from './pages/Home';
+import Details from './pages/Details';
+import { useState } from 'react';
 
 export default function App() {
+  const [page, setPage] = useState('home');
+  const [pokemon, setPokemon] = useState('');
+  if(page === 'home'){
+    return (
+      <Home/>
+    );
+  }
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-    </View>
-  );
+    <Details/>
+  )
 }
 
 const styles = StyleSheet.create({
