@@ -6,13 +6,17 @@ import { useState } from 'react';
 export default function App() {
   const [page, setPage] = useState('home');
   const [pokemon, setPokemon] = useState('');
+  function changePage(newPage, newPokemon) {
+    setPage(newPage);
+    setPokemon(newPokemon);
+  }
   if(page === 'home'){
     return (
-      <Home/>
+      <Home changePage={changePage}/>
     );
   }
   return (
-    <Details/>
+    <Details changePage={changePage} pokemon={pokemon}/>
   )
 }
 

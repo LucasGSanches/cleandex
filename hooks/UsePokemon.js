@@ -3,14 +3,13 @@ import { useState, useEffect } from 'react'
 export function usePokemon(url) {
   const [data, setData]       = useState(null)
   const [loading, setLoading] = useState(false)
-  const [erro, setErro]       = useState(null)
+  const [error, setError]       = useState(null)
 
   useEffect(() => {
     if (!url) return
-
     const controller = new AbortController()
     setLoading(true)
-    setErro(null)
+    setError(null)
 
     fetch(url, { signal: controller.signal })
       .then(res => {
@@ -19,7 +18,7 @@ export function usePokemon(url) {
       })
       .then(json => setData(json))
       .catch(err => {
-        if (err.name !== 'AbortError') setErro(err.message)
+        if (err.name !== 'AbortError') setError(err.message)
       })
       .finally(() => {
         if (!controller.signal.aborted) setLoading(false)
@@ -28,5 +27,5 @@ export function usePokemon(url) {
     return () => controller.abort()
   }, [url])
 
-  return { data, loading, erro }
+  return { data, loading, error }
 }
